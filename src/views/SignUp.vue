@@ -39,9 +39,9 @@ const submit = async () => {
     //유효성 체크
     if (checkValidation()) { return; }
 
-  //비밀번호, 확인 비밀번호 체크
+    //비밀번호, 확인 비밀번호 체크
     if (state.chkUpw !== state.data.upw) {
-        alert('비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+        alert( '비밀번호와 확인 비밀번호가 일치하지 않습니다.' );
         return;
     }
 
@@ -110,7 +110,8 @@ const submit = async () => {
                 class="form-control valid"
                 id="nickName"
                 placeholder="닉네임"
-                v-model="state.data.nickName"
+                v-model="state.data.nm"
+                not-null-message="닉네임은 필수로 입력하셔야 합니다."
                 regexp="^[가-힣]{2,10}$"
                 regexp-message="닉네임은 한글로 2~10자까지 가능합니다." />
             <label for="nickName" class="form-label">닉네임</label>
