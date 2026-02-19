@@ -16,7 +16,7 @@ const state = reactive({
         upw: 'aaaa1212!!'              
     },
     chkUpw: 'aaaa1212!!',
-    pic: ''
+    pic: null
 });
 
 const openFileSelector = e => {
@@ -125,7 +125,7 @@ const submit = async () => {
                 type="file"
                 accept="image/*"
                 @change="handlePicChanged" />
-            <span class="ms-3" v-if="state.data.pic">{{ state.data.pic.name }}</span>
+            <span class="ms-3" v-if="state.pic">{{ state.pic.name }}</span>
             </div>
             <div v-if="imageUrl">
                 <img :src="imageUrl" alt="Selected" style="max-width: 300px; margin-top: 10px;" />
