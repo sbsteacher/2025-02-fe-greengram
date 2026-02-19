@@ -1,4 +1,4 @@
-import './assets/main.css'
+// import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -13,9 +13,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(fas)
 
 //부트스트랩
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+import BootstrapVue3 from 'bootstrap-vue-3'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon);
@@ -24,7 +24,6 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia)
 app.use(router)
-app.use(BootstrapVue)
-app.use(IconsPlugin)
+app.use(BootstrapVue3)
 
 app.mount('#app')
