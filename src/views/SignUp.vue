@@ -16,6 +16,7 @@ const state = reactive({
         upw: 'aaaa1212!!'              
     },
     chkUpw: 'aaaa1212!!',
+    pic: ''
 });
 
 const openFileSelector = e => {
@@ -24,13 +25,13 @@ const openFileSelector = e => {
 
 const handlePicChanged = e => {
     imageUrl.value = null;
-    const pic = e.target.files[0];
-    if (pic) {
+    state.pic = e.target.files[0];
+    if (state.pic) {
         const reader = new FileReader();
         reader.onload = (e) => {
         imageUrl.value = e.target.result; // Data URL로 변환하여 저장
         };
-        reader.readAsDataURL(pic);
+        reader.readAsDataURL(state.pic);
     }
 };
 
@@ -47,8 +48,8 @@ const submit = async () => {
 
     const formData = new FormData();
     formData.append( 'req', new Blob([JSON.stringify(state.data)], { type: 'application/json' }) );
-    if (state.data.pic) {
-        formData.append( 'pic', state.data.pic );
+    if (state.pic) {
+        formData.append( 'pic', state.pic );
     }
 
     const res = await signUp(formData);
