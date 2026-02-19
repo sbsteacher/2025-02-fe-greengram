@@ -5,8 +5,6 @@ import { useAuthenticationStore } from '@/stores/authentication';
 
 const authenticationStore = useAuthenticationStore();
 
-const baseUrl = ref(import.meta.env.VITE_BASE_URL);
-
 const props = defineProps({
     userId: String,
     clsValue: String,
@@ -21,8 +19,8 @@ const pic = computed( () => props.pic
                             ?   props.userId === authenticationStore.state.signedUser.userId 
                                 ?   props.pic.startsWith('http') 
                                     ? props.pic
-                                    : `${baseUrl.value}/pic/profile/${props.userId}/${authenticationStore.state.signedUser.pic}` 
-                                : `${baseUrl.value}/pic/profile/${props.userId}/${props.pic}` 
+                                    : `/pic/user/${props.userId}/${authenticationStore.state.signedUser.pic}` 
+                                : `/pic/user/${props.userId}/${props.pic}` 
                             : defaultProfileImg );
 
 
