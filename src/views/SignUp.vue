@@ -13,8 +13,7 @@ const state = reactive({
     data: {
         nm: '홍길동',
         uid: 'mic2',
-        upw: 'aaaa1212!!',        
-        pic: null,        
+        upw: 'aaaa1212!!'              
     },
     chkUpw: 'aaaa1212!!',
 });
@@ -25,13 +24,13 @@ const openFileSelector = e => {
 
 const handlePicChanged = e => {
     imageUrl.value = null;
-    state.data.pic = e.target.files[0];
-    if (state.data.pic) {
+    const pic = e.target.files[0];
+    if (pic) {
         const reader = new FileReader();
         reader.onload = (e) => {
         imageUrl.value = e.target.result; // Data URL로 변환하여 저장
         };
-        reader.readAsDataURL(state.data.pic);
+        reader.readAsDataURL(pic);
     }
 };
 
