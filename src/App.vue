@@ -3,18 +3,19 @@ import HeaderComponent from './components/HeaderComponent.vue';
 import { ref, reactive } from 'vue';
 import { useMessageModalStore } from './stores/messageModal';
 import { useAuthenticationStore } from './stores/authentication';
+import { postFeed } from './services/feedService';
 
 const modalCloseButton = ref(null);
 const messageModalStore = useMessageModalStore();
 const authenticationStore = useAuthenticationStore();
 
 const state = reactive({
-  feed: {
-    location: '',
-    contents: '',
-    pics: []
-  },
-  previewPics: []
+    feed: {
+        location: '',
+        contents: '',
+        pics: []
+    },
+    previewPics: []
 });
 
 const handlePicChanged = e => {
@@ -53,31 +54,31 @@ const saveFeed = async () => {
         formData.append('pic', state.feed.pics[i])
     }
 
-    // const res = await postFeed(formData);
-    // if(res.status === 200) {
-    //     const result = res.data.result;
+    const res = await postFeed(formData);
+    if(res.status === 200) {
+        const result = res.data.result;
 
-    //     const item = {
-    //         ...params,
-    //         feedId: result.feedId,
-    //         pics: result.pics,
-    //         writerId: authenticationStore.state.signedUser.userId,
-    //         writerNickName: authenticationStore.state.signedUser.nickName,
-    //         writerPic: authenticationStore.state.signedUser.pic,
-    //         createdAt: getCurrentTimestamp(),
-    //         isLike: 0,
-    //         likeCount: 0,
-    //         comments: {
-    //             moreComment: false,
-    //             commentList: []
-    //         }  
-    //     };
+        const item = {
+            ...params,
+            feedId: result.feedId,
+            pics: result.pics,
+            writerId: authenticationStore.state.signedUser.userId,
+            writerNickName: authenticationStore.state.signedUser.nickName,
+            writerPic: authenticationStore.state.signedUser.pic,
+            createdAt: getCurrentTimestamp(),
+            isLike: 0,
+            likeCount: 0,
+            comments: {
+                moreComment: false,
+                commentList: []
+            }  
+        };
 
-    //     //state.list.unshift(item);
-    //     feedStore.addFeedUnshift(item)
-    //     initInputs();
-    //     modalCloseButton.value.click(); //모달창 닫기
-    // }
+        //state.list.unshift(item);
+        //feedStore.addFeedUnshift(item)
+        initInputs();
+        modalCloseButton.value.click(); //모달창 닫기
+    }
 }
 
 const initInputs = () => {
