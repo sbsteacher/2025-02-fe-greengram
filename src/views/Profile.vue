@@ -193,19 +193,10 @@ onBeforeRouteUpdate((to, from) => {
                 :pic="state.userProfile.pic"
                 :userId="state.userProfile.userId" />
             </div>
-            <div
-            className="d-inline-flex item_container width-50"
-            v-if="state.isMyProfile && state.userProfile.pic">
-            <i
-                className="fa fa-minus-square color-red pointer"
-                @click="removeUserPic" />
+            <div class="d-inline-flex item_container width-50" v-if="state.isMyProfile && state.userProfile.pic">
+                <font-awesome-icon icon="fa fa-minus-square" class="color-red pointer" @click="removeUserPic" />
             </div>
-            <input
-            hidden
-            type="file"
-            accept="image/*"
-            ref="fileInput"
-            @change="handlePicChanged" />
+            <input hidden type="file" accept="image/*" ref="fileInput" @change="handlePicChanged" />
         </div>
         <table>
             <thead></thead>

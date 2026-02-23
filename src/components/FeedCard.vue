@@ -83,8 +83,8 @@ const toggleLike = async () => {
           props.ynDel &&
           props.item.writerUserId == authenticationStore.state.signedUser.userId
         ">
-        <div className="d-flex flex-column justify-content-center">
-          <font-awesome-icon icon="fa fa-trash" className="pointer color-red" @click="$emit('onDeleteFeed')" />
+        <div class="d-flex flex-column justify-content-center">
+          <font-awesome-icon icon="fa fa-trash" class="pointer color-red" @click="$emit('onDeleteFeed')" />
         </div>
       </div>
     </div>
