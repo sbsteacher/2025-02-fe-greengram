@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref, reactive } from 'vue';
 import { getDateTimeInfo } from '@/utils/feedUtils';
 import { toggleFeedLike } from '@/services/feedLikeService';
+import { useCommentModalStore } from '@/stores/commentModal';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -14,6 +15,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const baseUrl = ref(import.meta.env.VITE_BASE_URL);
+const commentModalStore = useCommentModalStore();
 
 const authenticationStore = useAuthenticationStore();
 
@@ -49,6 +51,10 @@ const toggleLike = async () => {
     state.likeCount = state.isLike ? state.likeCount + 1 : state.likeCount - 1;
   }
 };
+
+const showCommentModel = () => {
+  commentModalStore.setFeedId(props.item.feedId);
+}
 </script>
 
 <template>
@@ -114,16 +120,16 @@ const toggleLike = async () => {
       </div>
 
       <div>
-        <font-awesome-icon icon="fa-regular fa-comment" class="pointer rem1_2 me-3" />
+        <font-awesome-icon icon="fa-regular fa-comment" class="pointer rem1_2 me-3" @click="showCommentModel"/>
         <span>{{ props.item.commentCount }}</span>
       </div>
     </div>
     <div class="itemCtnt p-2" v-if="props.item.contents">
       {{ props.item.contents }}
     </div>
-    <feed-comment-container
+    <!-- <feed-comment-container
       :feed-id="props.item.feedId"
-      :comments="props.item.comments" />
+      :comments="props.item.comments" /> -->
   </div>
 </template>
 

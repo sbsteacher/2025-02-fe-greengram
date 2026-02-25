@@ -114,23 +114,21 @@ const onClickFollow = async () => {
     switch (state.userProfile.followState) {
         case 0:
         case 2: //post
-        const postRes = await postUserFollow({
-            toUserId: state.userProfile.userId,
-        });
-        if (postRes.status === 200) {
-            state.userProfile.followState += 1;
-            state.userProfile.followerCount += 1;
-        }
-        break;
+            const postRes = await postUserFollow({ toUserId: state.userProfile.userId });
+            if (postRes.status === 200) {
+                state.userProfile.followState += 1;
+                state.userProfile.followerCount += 1;
+            }
+            break;
         default: //delete
-        const deleteRes = await deleteUserFollow({
-            to_user_id: state.userProfile.userId,
-        });
-        if (deleteRes.status === 200) {
-            state.userProfile.followState -= 1;
-            state.userProfile.followerCount -= 1;
-        }
-        break;
+            const deleteRes = await deleteUserFollow({
+                to_user_id: state.userProfile.userId,
+            });
+            if (deleteRes.status === 200) {
+                state.userProfile.followState -= 1;
+                state.userProfile.followerCount -= 1;
+            }
+            break;
     }
 };
 
