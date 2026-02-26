@@ -127,9 +127,6 @@ const showCommentModel = () => {
     <div class="itemCtnt p-2" v-if="props.item.contents">
       {{ props.item.contents }}
     </div>
-    <!-- <feed-comment-container
-      :feed-id="props.item.feedId"
-      :comments="props.item.comments" /> -->
   </div>
 </template>
 
