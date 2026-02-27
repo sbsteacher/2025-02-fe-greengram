@@ -111,10 +111,12 @@ const getCurrentTimestamp = () => {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+//메인 스크롤 방지 > 풀기 toggle
 watch(() => commentModalStore.state.showModal,(isShown) => {
     document.body.classList.toggle('no-scroll', isShown);
 });
 
+//댓글에서 스크롤이 내려간 상태에서 댓글을 쓰면 댓글 스크롤이 상단으로 이동
 watch(() => commentModalStore.state.commentList.length, async (newLen, oldLen) => {
     // 댓글이 삭제된 게 아니라 추가된 경우에만 실행 (newLen > oldLen)
     if (newLen > oldLen) {

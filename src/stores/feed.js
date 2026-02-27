@@ -41,17 +41,14 @@ export const useFeedStore = defineStore('feed',
             state.feedList = []
         }
 
-        const commentCountUp = feedId => {
-            console.log('feedId: ', feedId);
+        const commentCountUp = feedId => {            
             const feed = state.feedList.find(item => item.feedId === feedId);
-            console.log('commentCountUp - feed: ', feed);
             feed.commentCount++;
             
         }
 
         const commentCountDown = feedId => {
-            const feed = state.feedList.find(item => item.feedId === feedId);
-            console.log('commentCountDown - feed: ', feed);
+            const feed = state.feedList.find(item => item.feedId === feedId);            
             feed.commentCount--;
         }
 

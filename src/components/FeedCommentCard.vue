@@ -5,7 +5,7 @@ import { useAuthenticationStore } from '@/stores/authentication';
 const authenticationStore = useAuthenticationStore();
 
 const props = defineProps({
-  item: Object  
+  item: Object
 });
 
 const emit = defineEmits(['onDeleteComment']);
