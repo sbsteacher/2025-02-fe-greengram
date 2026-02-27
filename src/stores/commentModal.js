@@ -27,11 +27,10 @@ export const useCommentModalStore = defineStore(
             state.page = 1;
         }
 
-        const setFeedId = feedId => {
-            close();
+        const setFeedId = feedId => {            
+            close();            
             state.showModal = true;
-            state.feedId = feedId;
-            doGetCommentList();
+            state.feedId = feedId;            
         }
 
         const doPostComment = async () => {
@@ -65,12 +64,11 @@ export const useCommentModalStore = defineStore(
                 
                 const feedStore = useFeedStore();
                 feedStore.commentCountUp(state.feedId);
-                
             }
         }
 
         const doGetCommentList = async () => { 
-            if(state.isFinish) { return; }
+            if(state.isLoading || state.isFinish || state.feedId === 0) { return; }
             state.isLoading = true;
             const params = {
                 feed_id: state.feedId
