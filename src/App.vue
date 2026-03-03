@@ -18,10 +18,6 @@ const authenticationStore = useAuthenticationStore();
 const feedStore = useFeedStore();
 const commentModalStore = useCommentModalStore();
 
-useInfiniteScroll(commentListContainer, () => {    
-    commentModalStore.doGetCommentList();
-});
-
 const state = reactive({
     feed: {
         location: '',
@@ -146,7 +142,7 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
 
     // 댓글 리스트 변경 후 (삭제 포함) 스크롤 상태를 다시 확인
     await nextTick();
-    checkInfiniteScroll();
+    checkInfiniteScroll(); //댓글 삭제를 하면 다음 페이지 호출
 }, { deep: true }); //deep: true는 리스트 item의 값 변경까지도 watch하겠다는 의미
 </script>
 
