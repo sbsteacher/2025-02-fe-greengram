@@ -57,7 +57,7 @@ const showCommentModel = () => {
 }
 </script>
 
-<template>
+<template>  
   <div class="item mb-3 p-3 w400">
     <div class="d-flex flex-row ps-3 pe-3">
       <div class="d-flex flex-column justify-content-center">

@@ -1,8 +1,8 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive } from 'vue'; //반응형 상태(화면에 변화)
 import { useRouter } from 'vue-router';
 import { signIn } from '@/services/userService';
-import { useAuthenticationStore } from '@/stores/authentication';
+import { useAuthenticationStore } from '@/stores/authentication'; //pinia 상태관리
 import { checkValidation } from '@/utils/validation';
 
 const router = useRouter();
@@ -17,7 +17,7 @@ const state = reactive({
 });
 
 const submit = async () => {
-  //유효성 체크
+    //유효성 체크    
     if (checkValidation()) { return; }
 
     const res = await signIn(state.form);

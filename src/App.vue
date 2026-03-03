@@ -147,7 +147,7 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
 </script>
 
 <template>
-    <header-component />    
+    <header-component />
     <router-view />
     
     <b-modal v-model="messageModalStore.state.isShow" ok-only>{{ messageModalStore.state.message }}</b-modal>
