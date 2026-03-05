@@ -55,6 +55,7 @@ export const useCommentModalStore = defineStore(
                     writerUserId: authenticationStore.state.signedUser.userId,
                     writerNickName: authenticationStore.state.signedUser.nickName,
                     writerPic: authenticationStore.state.signedUser.pic,
+                    feedId: state.feedId,
                     comment: state.comment,
                     isSelf: true,
                 };
@@ -92,10 +93,10 @@ export const useCommentModalStore = defineStore(
             const res = await deleteComment( params );
             if(res.status === 200) {
                 const idx = state.commentList.indexOf(item);
-                state.commentList.splice(idx, 1);
+                state.commentList.splice(idx, 1); //배열에서 아이템 삭제하는 방법
 
                 const feedStore = useFeedStore();
-                feedStore.commentCountDown(feedId);
+                feedStore.commentCountDown(item.feedId);
             }
         }
 

@@ -158,7 +158,7 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
         <div class="p-3 h100p d-flex flex-column comment-container">
             <div ref="commentListContainer" class="comment-list overflow-y-auto">
                 <FeedCommentCard
-                    v-for="(item, idx) in commentModalStore.state.commentList"
+                    v-for="item in commentModalStore.state.commentList"
                     :key="item.feedCommentId"
                     :item="item" />
                 <div v-if="commentModalStore.state.isLoading" class="loading display-none">
