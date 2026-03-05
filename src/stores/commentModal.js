@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import { postComment, getCommentList, deleteComment } from '@/services/feedCommentService';
 import { useAuthenticationStore } from '@/stores/authentication';
 import { useFeedStore } from '@/stores/feed'; 
+import { getCurrentTimestamp } from '@/utils/commonUtils';
 
 export const useCommentModalStore = defineStore(
     "commentModal",
@@ -57,6 +58,7 @@ export const useCommentModalStore = defineStore(
                     writerPic: authenticationStore.state.signedUser.pic,
                     feedId: state.feedId,
                     comment: state.comment,
+                    createdAt: getCurrentTimestamp(),
                     isSelf: true,
                 };
 

@@ -68,8 +68,10 @@ const buy = async () => {
 
 //메인 화면으로 이동
 const moveToMain = e => {
+    // 현재 주소가 '/'이면 아무 작업도 안 한다. 
+    if(route.path === '/') { return; }
     // feedStore.init 초기화해주어야 메인화면에서 모든 사용자의 피드 리스트가 뜬다. 
-    feedStore.init();
+    feedStore.init();    
     router.push('/');
 }
 

@@ -2,6 +2,7 @@
 import ProfileImg from './ProfileImg.vue';
 import { useAuthenticationStore } from '@/stores/authentication';
 import { useCommentModalStore } from '@/stores/commentModal';
+import { getDateTimeInfo } from '@/utils/commonUtils';
 
 const authenticationStore = useAuthenticationStore();
 const commentModalStore = useCommentModalStore();
@@ -34,6 +35,7 @@ const props = defineProps({
           </div>        
         </div>
       </router-link>
+      <div style="margin-left: 10px;">{{ getDateTimeInfo(props.item.createdAt) }}</div>
       <div v-if="authenticationStore.state.signedUser.userId === props.item.writerUserId" class="ms-3">
           <font-awesome-icon icon="fa fa-trash" class="pointer" 
             @click="commentModalStore.doDeleteComment(props.item)" />
