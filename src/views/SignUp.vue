@@ -6,7 +6,6 @@ import { checkValidation } from '@/utils/validation';
 
 const fileInput = ref(null);
 const imageUrl = ref(null);
-
 const router = useRouter();
 
 const state = reactive({
@@ -24,12 +23,13 @@ const openFileSelector = e => {
 };
 
 const handlePicChanged = e => {
-    imageUrl.value = null;
+    imageUrl.value = null;    
+
     state.pic = e.target.files[0];
     if (state.pic) {
         const reader = new FileReader();
-        reader.onload = (e) => {
-        imageUrl.value = e.target.result; // Data URL로 변환하여 저장
+        reader.onload = e => {
+            imageUrl.value = e.target.result; // Data URL로 변환하여 저장        
         };
         reader.readAsDataURL(state.pic);
     }
@@ -54,7 +54,7 @@ const submit = async () => {
 
     const res = await signUp(formData);
     console.log('res:', res);
-    if (res) {
+    if (res.status === 200) {
         alert('회원가입을 축하합니다.');
         await router.push('/sign-in');
     }
@@ -105,6 +105,7 @@ const submit = async () => {
             <label for="chkUpw" class="form-label">비밀번호 확인</label>
             </div>
             <div class="form-floating">
+           
             <input
                 type="text"
                 class="form-control valid"
@@ -117,20 +118,21 @@ const submit = async () => {
             <label for="nickName" class="form-label">닉네임</label>
             </div>
             <div>
-            <b-button variant="outline-primary" @click="openFileSelector">프로필 사진</b-button>
-            <input
-                ref="fileInput"
-                hidden
-                id="pic"
-                type="file"
-                accept="image/*"
-                @change="handlePicChanged" />
-            <span class="ms-3" v-if="state.pic">{{ state.pic.name }}</span>
+                <b-button variant="outline-primary" @click="openFileSelector">프로필 사진</b-button>            
+                <!-- multiple 속성이 없으면 파일 선택은 단 하나밖에 안 된다. -->
+                <input
+                    ref="fileInput"
+                    hidden
+                    id="pic"
+                    type="file"
+                    accept="image/*"
+                    @change="handlePicChanged" />
+                <span class="ms-3" v-if="state.pic">{{ state.pic.name }}</span>
             </div>
-            <div v-if="imageUrl">
+            <div v-show="imageUrl">
                 <img :src="imageUrl" alt="Selected" style="max-width: 300px; margin-top: 10px;" />
             </div>
-            <button class="w-100 h6 btn py-3 btn-primary">회원가입</button>
+            <button type="submit" class="w-100 h6 btn py-3 btn-primary">회원가입</button>
         </form>
     </div>
 </div>

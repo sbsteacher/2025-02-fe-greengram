@@ -1,13 +1,13 @@
 <script setup>
 import HeaderComponent from './components/HeaderComponent.vue';
 import loadingImg from '@/assets/loading.gif';
+import FeedCommentCard from './components/FeedCommentCard.vue';
+import { useCommentModalStore } from './stores/commentModal';
 import { ref, reactive, watch, nextTick } from 'vue';
 import { useMessageModalStore } from './stores/messageModal';
 import { useAuthenticationStore } from './stores/authentication';
 import { useFeedStore } from './stores/feed';
 import { postFeed } from './services/feedService';
-import { useCommentModalStore } from './stores/commentModal';
-import FeedCommentCard from './components/FeedCommentCard.vue';
 import { useInfiniteScroll } from '@/composables/useInfiniteScroll';
 
 const modalCloseButton = ref(null);
@@ -147,7 +147,7 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
 </script>
 
 <template>
-    <header-component />
+    <HeaderComponent />
     <router-view />
     
     <b-modal v-model="messageModalStore.state.isShow" ok-only>{{ messageModalStore.state.message }}</b-modal>
@@ -155,7 +155,7 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
     <b-modal v-model="commentModalStore.state.showModal" size="lg" no-close-on-backdrop hide-footer modal-class="my-custom-modal" @close="commentModalStore.close">
         <div class="p-3 h100p d-flex flex-column comment-container">
             <div ref="commentListContainer" class="comment-list overflow-y-auto">
-                <feed-comment-card
+                <FeedCommentCard
                     v-for="(item, idx) in commentModalStore.state.commentList"
                     :key="item.feedCommentId"
                     :item="item"

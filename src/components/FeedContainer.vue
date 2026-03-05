@@ -1,9 +1,8 @@
 <script setup>
 import loadingImg from '@/assets/loading.gif';
 import FeedCard from '@/components/FeedCard.vue';
-import { reactive, onMounted, onUnmounted, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import { useFeedStore } from '@/stores/feed';
-import { bindEvent, throttle } from '@/utils/commonUtils';
 import { getFeedList, deleteFeed } from '@/services/feedService';
 import { useInfiniteScroll } from '@/composables/useInfiniteScroll';
 
@@ -14,9 +13,8 @@ const props = defineProps({
 });
 
 useInfiniteScroll(window, () => {
-    if(!state.isFinish) {
-        getData(); // 바닥에 닿으면 실행할 함수
-    }
+    if(state.isFinish) { return; }
+    getData(); // 바닥에 닿으면 실행할 함수
 });
 
 const state = reactive({
@@ -24,8 +22,7 @@ const state = reactive({
     isFinish: false
 });
 
-const getData = async () => {
-    
+const getData = async () => {    
     state.isLoading = true;
     const params = {
         page: feedStore.page,
@@ -47,7 +44,7 @@ const getData = async () => {
                 feedStore.addFeedList(result);                        
             }
             if(result.length < feedStore.rowPerPage) {
-                state.isFinish = true
+                state.isFinish = true;
             }        
         }
     } catch(e) {
@@ -87,7 +84,7 @@ watch(() => feedStore.reLoading, newVal => {
 
 <template>    
     <feed-card v-for="(item, idx) in feedStore.feedList" :key="item.feedId" :item="item" :yn-del="props.ynDel" @on-delete-feed="doDeleteFeed(item.feedId, idx)" />
-    <div v-if="state.isLoading" class="loading"><img :src="loadingImg"/></div>    
+    <div v-show="state.isLoading" class="loading"><img :src="loadingImg" /></div>    
 </template>
 
 <style scoped>
