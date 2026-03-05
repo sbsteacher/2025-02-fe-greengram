@@ -60,7 +60,7 @@ export const getDateTimeInfo = dt => {
 
     const diffSec = nowDtSec - targetDtSec;
     if(diffSec < 120) {
-        return '1분 전';
+        return '방금';
     } else if(diffSec < 3600) { //분 단위 (60 * 60)
         return `${parseInt(diffSec / 60)}분 전`;
     } else if(diffSec < 86400) { //시간 단위 (60 * 60 * 24)

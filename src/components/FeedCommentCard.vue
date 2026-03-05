@@ -35,7 +35,7 @@ const props = defineProps({
           </div>        
         </div>
       </router-link>
-      <div style="margin-left: 10px;">{{ getDateTimeInfo(props.item.createdAt) }}</div>
+      <div class="ms-2">{{ getDateTimeInfo(props.item.createdAt) }}</div>
       <div v-if="authenticationStore.state.signedUser.userId === props.item.writerUserId" class="ms-3">
           <font-awesome-icon icon="fa fa-trash" class="pointer" 
             @click="commentModalStore.doDeleteComment(props.item)" />
