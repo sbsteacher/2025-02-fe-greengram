@@ -146,20 +146,21 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
 }, { deep: true }); //deep: true는 리스트 item의 값 변경까지도 watch하겠다는 의미
 </script>
 
-<template>
+<template>    
     <HeaderComponent />
     <router-view />
     
     <b-modal v-model="messageModalStore.state.isShow" ok-only>{{ messageModalStore.state.message }}</b-modal>
 
-    <b-modal v-model="commentModalStore.state.showModal" size="lg" no-close-on-backdrop hide-footer modal-class="my-custom-modal" @close="commentModalStore.close">
+    <b-modal v-model="commentModalStore.state.showModal" size="lg" 
+            no-close-on-backdrop hide-footer 
+            modal-class="my-custom-modal" @close="commentModalStore.close">
         <div class="p-3 h100p d-flex flex-column comment-container">
             <div ref="commentListContainer" class="comment-list overflow-y-auto">
                 <FeedCommentCard
                     v-for="(item, idx) in commentModalStore.state.commentList"
                     :key="item.feedCommentId"
-                    :item="item"
-                    @on-delete-comment="commentModalStore.doDeleteComment(item.feedCommentId, idx, item.feedId)" />
+                    :item="item" />
                 <div v-if="commentModalStore.state.isLoading" class="loading display-none">
                     <img :src="loadingImg" />
                 </div>
@@ -175,8 +176,7 @@ watch(() => commentModalStore.state.commentList, async (newList) => {
 
                 <button class="btn btn-outline-primary" @click="commentModalStore.doPostComment">
                     등록
-                </button>
-                
+                </button>                
             </div>
         </div>
         

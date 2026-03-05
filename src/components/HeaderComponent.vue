@@ -7,7 +7,6 @@ import { reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { signOut } from '@/services/userService';
 
-
 const route = useRoute();
 const router = useRouter();
 const authenticationStore = useAuthenticationStore();
